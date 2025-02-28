@@ -1,0 +1,17 @@
+{
+	"editor.tabSize": 2,
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true,
+	"files.associations": {
+		"**/{src,assets}/**/*.css": "tailwindcss",
+		"*.svg": "html"
+	},
+	"[html]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"tailwindCSS.includeLanguages": {
+		"vue": "html",
+		"vue-html": "html"
+	},
+	"python.terminal.launchArgs": []
+}

@@ -1,0 +1,182 @@
+{
+	"name": "legexis",
+	"displayName": "Legexis",
+	"version": "0.0.3",
+	"main": "dist/extension.js",
+	"engines": {
+		"node": "^23.6.0",
+		"vscode": "^1.96.0"
+	},
+	"publisher": "lhrika",
+	"activationEvents": [],
+	"contributes": {
+		"configuration": {
+			"title": "Legexis Settings",
+			"properties": {
+				"legexis.dictionaryFileName": {
+					"type": "string",
+					"default": "dictionary.json",
+					"description": "The file name (.json) of the dictionary."
+				},
+				"legexis.languages": {
+					"type": "array",
+					"default": [
+						{
+							"code": "en",
+							"label": "English",
+							"description": "🇺🇸🇬🇧"
+						},
+						{
+							"code": "vi",
+							"label": "Vietnamese",
+							"description": "🇻🇳"
+						}
+					],
+					"items": {
+						"type": "object",
+						"properties": {
+							"code": {
+								"type": "string",
+								"description": "Language code (must be unique)"
+							},
+							"label": {
+								"type": "string",
+								"description": "A human-readable label for the language"
+							},
+							"description": {
+								"type": "string",
+								"description": "A human-readable description of the language"
+							}
+						}
+					}
+				},
+				"legexis.tratu.python": {
+					"type": "string",
+					"default": "python3",
+					"description": "Path to Python interpreter for LLM based translation."
+				},
+				"legexis.tratu.translationScript": {
+					"type": "string",
+					"default": "dist/translate-vi-en.py",
+					"description": "Path to LLM based translation Python script."
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "legexis.selectLanguage",
+				"title": "Select language"
+			},
+			{
+				"command": "legexis.saveDictionary",
+				"title": "Save dictionary"
+			},
+			{
+				"command": "legexis.convertVietnameseToneStyle",
+				"title": "Use new style of tone"
+			}
+		],
+		"viewsContainers": {
+			"activitybar": [
+				{
+					"icon": "dist/notebook.svg",
+					"id": "dictionary",
+					"title": "Dictionary"
+				}
+			]
+		},
+		"views": {
+			"dictionary": [
+				{
+					"type": "webview",
+					"id": "legexis.dictionaryView",
+					"title": "Dictionary View",
+					"name": "Dictionary"
+				},
+				{
+					"type": "webview",
+					"id": "legexis.searchView",
+					"title": "Search View",
+					"name": "Search"
+				},
+				{
+					"type": "webview",
+					"id": "legexis.tratuView",
+					"title": "Tratu",
+					"name": "Tratu",
+					"when": "legexis.tratuView.show"
+				},
+				{
+					"type": "webview",
+					"id": "legexis.ollamaView",
+					"title": "Ollama",
+					"name": "Ollama"
+				}
+			]
+		}
+	},
+	"scripts": {
+		"dev": "vite build --mode development",
+		"dev:watch": "vite build --mode development --watch",
+		"build": "vite build",
+		"build:watch": "vite build --watch",
+		"build-media": "vite build --config vite.config.media.ts",
+		"build-media:watch": "vite build --config vite.config.media.ts --watch",
+		"check": "tsc --noEmit",
+		"package": "vsce package -o dist",
+		"format": "prettier . --write",
+		"lint": "eslint .",
+		"prepare": "husky",
+		"commitlint": "commitlint --edit",
+		"pretest": "npm run dev",
+		"test": "NODE_TLS_REJECT_UNAUTHORIZED=0 vscode-test"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/lhrika/legexis.git"
+	},
+	"keywords": [],
+	"author": "Ly Hương <lyhng.rika@gmail.com>",
+	"license": "GPL-3.0-only",
+	"bugs": {
+		"url": "https://github.com/lhrika/legexis/issues"
+	},
+	"homepage": "https://github.com/lhrika/legexis#readme",
+	"description": "A moyu extension made by a moyu cat for moyu",
+	"categories": [
+		"Other"
+	],
+	"devDependencies": {
+		"@commitlint/cli": "^19.6.1",
+		"@commitlint/config-conventional": "^19.6.0",
+		"@eslint/js": "^9.19.0",
+		"@tailwindcss/postcss": "^4.0.0",
+		"@types/node": "^22.12.0",
+		"@types/vscode": "^1.96.0",
+		"@types/vscode-webview": "^1.57.5",
+		"@vitejs/plugin-vue": "^5.2.1",
+		"@vscode/test-cli": "^0.0.10",
+		"@vscode/test-electron": "^2.4.1",
+		"@vscode/vsce": "^3.2.2",
+		"eslint": "^9.19.0",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-plugin-vue": "^9.32.0",
+		"globals": "^15.14.0",
+		"husky": "^9.1.7",
+		"postcss": "^8.5.1",
+		"prettier": "^3.4.2",
+		"tailwindcss": "^4.0.0",
+		"typescript": "^5.7.3",
+		"typescript-eslint": "^8.22.0",
+		"vite": "^6.0.11"
+	},
+	"dependencies": {
+		"@vscode/codicons": "^0.0.36",
+		"axios": "^1.7.9",
+		"cheerio": "^1.0.0",
+		"marked": "^15.0.7",
+		"ollama": "^0.5.13",
+		"trie-search": "^2.2.0",
+		"vue": "^3.5.13"
+	}
+}
