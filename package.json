@@ -5,7 +5,7 @@
 	"main": "dist/extension.js",
 	"engines": {
 		"node": "^23.6.0",
-		"vscode": "^1.96.0"
+		"vscode": "^1.97.0"
 	},
 	"publisher": "lhrika",
 	"activationEvents": [],
